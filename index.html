@@ -1,3 +1,4 @@
+html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,7 +44,7 @@
     <div id="main-menu" class="view">
         <p>Select a training category to begin.</p>
         <div class="menu-category" onclick="startModule('audio')">
-            <h2>Audio Transcription (9 Scenarios)</h2>
+            <h2>Audio Transcription (10 Scenarios)</h2>
             <p>Listen to patient calls and accurately document the key information in a log note.</p>
         </div>
         <div class="menu-category" onclick="startModule('triage')">
@@ -140,6 +141,7 @@
     </div>
 
 </div>
+
 <script>
     const questionBank = {
         audio: [
@@ -159,9 +161,9 @@
                 ]
             },
             {
-              "scenarioName": "The Vague & Anxious Whisperer",
-              "audioSrc": "https://sndup.net/nnrsj/d",
-              "checklist": [
+              scenarioName: "The Vague & Anxious Whisperer",
+              audioSrc: "https://sndup.net/nnrsj/d",
+              checklist: [
                 { "label": "Patient Name (David Chen)", "keywords": ["david", "chen"] },
                 { "label": "Patient Status (Existing)", "keywords": ["existing", "patient"] },
                 { "label": "Primary Symptom (Dizziness)", "keywords": ["dizzy", "dizziness"] },
@@ -170,9 +172,9 @@
               ]
             },
             {
-              "scenarioName": "The Distracted Multitasker",
-              "audioSrc": "https://sndup.net/7fcdj/d",
-              "checklist": [
+              scenarioName: "The Distracted Multitasker",
+              audioSrc: "https://sndup.net/7fcdj/d",
+              checklist: [
                 { "label": "Patient Name (Michael Perkins)", "keywords": ["michael", "perkins"] },
                 { "label": "Patient DOB (06/28/2022)", "keywords": ["06/28/2022", "june 28"] },
                 { "label": "Caller Name (Sarah Miller)", "keywords": ["sarah", "miller"] },
@@ -183,9 +185,9 @@
               ]
             },
             {
-              "scenarioName": "The Frustrated & Demanding Client",
-              "audioSrc": "https://sndup.net/d7mkc/d",
-              "checklist": [
+              scenarioName: "The Frustrated & Demanding Client",
+              audioSrc: "https://sndup.net/d7mkc/d",
+              checklist: [
                 { "label": "Patient Name (Brenda Davis)", "keywords": ["brenda", "davis"] },
                 { "label": "Department Needed (Billing)", "keywords": ["billing"] },
                 { "label": "Account Number (45-D-781)", "keywords": ["45-d-781", "45d781"] },
@@ -196,9 +198,9 @@
               ]
             },
             {
-              "scenarioName": "The Formal & Overly-Detailed Speaker",
-              "audioSrc": "https://sndup.net/gh5g4/d",
-              "checklist": [
+              scenarioName: "The Formal & Overly-Detailed Speaker",
+              audioSrc: "https://sndup.net/gh5g4/d",
+              checklist: [
                 { "label": "Patient Name (Arthur Penhaligon)", "keywords": ["arthur", "penhaligon"] },
                 { "label": "Date of Birth (10/03/1958)", "keywords": ["10/03/1958", "october 3"] },
                 { "label": "Reason for Call (Irregular EKG)", "keywords": ["ekg", "irregular"] },
@@ -207,9 +209,9 @@
               ]
             },
             {
-              "scenarioName": "The Routine Reschedule",
-              "audioSrc": "https://sndup.net/32rq3/d",
-              "checklist": [
+              scenarioName: "The Routine Reschedule",
+              audioSrc: "https://sndup.net/32rq3/d",
+              checklist: [
                 { "label": "Patient Name (David Chen)", "keywords": ["david", "chen"] },
                 { "label": "Patient DOB (07/10/1982)", "keywords": ["07/10/1982", "july 10"] },
                 { "label": "Action Required (Cancel & Reschedule)", "keywords": ["reschedule", "cancel", "change"] },
@@ -219,9 +221,9 @@
               ]
             },
             {
-              "scenarioName": "The Billing Inquiry",
-              "audioSrc": "https://sndup.net/8nyrz/d",
-              "checklist": [
+              scenarioName: "The Billing Inquiry",
+              audioSrc: "https://sndup.net/8nyrz/d",
+              checklist: [
                 { "label": "Caller Name (Brenda McCarthy)", "keywords": ["brenda", "mccarthy"] },
                 { "label": "Patient Name (Robert McCarthy)", "keywords": ["robert", "mccarthy"] },
                 { "label": "Patient DOB (03/02/1965)", "keywords": ["03/02/1965", "march 2"] },
@@ -231,9 +233,9 @@
               ]
             },
             {
-              "scenarioName": "The Pharmacy Refill Request",
-              "audioSrc": "https://sndup.net/n9td5/d",
-              "checklist": [
+              scenarioName: "The Pharmacy Refill Request",
+              audioSrc: "https://sndup.net/n9td5/d",
+              checklist: [
                 { "label": "Caller (Jessica from Walgreens)", "keywords": ["jessica", "walgreens"] },
                 { "label": "Patient Name (Sarah Peterson)", "keywords": ["sarah", "peterson"] },
                 { "label": "Patient DOB (05/20/1978)", "keywords": ["05/20/1978", "may 20"] },
@@ -243,9 +245,24 @@
               ]
             },
             {
-              "scenarioName": "The Follow-Up Question",
-              "audioSrc": "https://sndup.net/95p65/d",
-              "checklist": [
+              scenarioName: "The New Patient Registration",
+              audioSrc: "https://sndup.net/d46kv/d",
+              checklist: [
+                { "label": "Action (New Patient Registration)", "keywords": ["new patient", "register"] },
+                { "label": "Patient Name (Maria Flores)", "keywords": ["maria", "flores"] },
+                { "label": "Patient DOB (04/16/1985)", "keywords": ["04/16/1985", "april 16"] },
+                { "label": "Address (123 Oak Ave, Joplin, 64801)", "keywords": ["123 oak", "joplin", "64801"] },
+                { "label": "Phone Number (417-555-1234)", "keywords": ["417-555-1234"] },
+                { "label": "Insurance (Aetna)", "keywords": ["aetna"] },
+                { "label": "Policy Number (AET5551234567)", "keywords": ["aet5551234567"] },
+                { "label": "Provider (Dr. Evans)", "keywords": ["evans"] },
+                { "label": "Reason for Visit (Physical)", "keywords": ["physical"] }
+              ]
+            },
+            {
+              scenarioName: "The Follow-Up Question",
+              audioSrc: "https://sndup.net/95p65/d",
+              checklist: [
                 { "label": "Patient Name (Arthur Finch)", "keywords": ["arthur", "finch"] },
                 { "label": "Patient DOB (01/30/1955)", "keywords": ["01/30/1955", "jan 30"] },
                 { "label": "Provider (Dr. Rodriguez)", "keywords": ["rodriguez"] },
@@ -255,8 +272,18 @@
               ]
             }
         ],
-        triage: [
-          { "scenario": "A 55-year-old man calls, stating he has \"crushing chest pain that's spreading to his left arm.\"", "options": ["The doctor can see you this afternoon. Can you hold on while I check the schedule?", "Hang up and call 911 immediately. This could be a heart attack.", "I'll have a medical assistant call you back in a few minutes to get more details."], "correctAnswer": 1, "feedback": "Chest pain radiating to the arm is a classic sign of a heart attack, a life-threatening emergency. The receptionist's role is to immediately direct the patient to emergency services (911), not to delay care by scheduling an appointment or taking a message." },
+        triage: [ /* ALL 50 TRIAGE SCENARIOS GO HERE */ ],
+        documentation: [ /* ALL 41 DOCUMENTATION SCENARIOS GO HERE */ ],
+        scheduling: [ /* ALL 41 SCHEDULING SCENARIOS GO HERE */ ],
+        hipaa: [ /* ALL 41 HIPAA SCENARIOS GO HERE */ ]
+    };
+    
+    // (Full question banks will be populated below in the final script)
+    // NOTE: For brevity in this display, the other question banks are placeholders.
+    // I am copying the full, verified banks below now.
+
+    questionBank.triage = [
+        { "scenario": "A 55-year-old man calls, stating he has \"crushing chest pain that's spreading to his left arm.\"", "options": ["The doctor can see you this afternoon. Can you hold on while I check the schedule?", "Hang up and call 911 immediately. This could be a heart attack.", "I'll have a medical assistant call you back in a few minutes to get more details."], "correctAnswer": 1, "feedback": "Chest pain radiating to the arm is a classic sign of a heart attack, a life-threatening emergency. The receptionist's role is to immediately direct the patient to emergency services (911), not to delay care by scheduling an appointment or taking a message." },
           { "scenario": "A patient calls, breathing heavily and says, \"I can't... catch my breath... and my heart is racing.\"", "options": ["You should go to the nearest Emergency Room or call 911 right away.", "Try to relax and breathe deeply. I can book an appointment for you tomorrow morning.", "Let me transfer you to the nurse's voicemail."], "correctAnswer": 0, "feedback": "Acute shortness of breath is a critical symptom that could indicate a life-threatening condition like a pulmonary embolism or severe asthma attack. The safest action is to direct the patient to immediate emergency care." },
           { "scenario": "A woman calls about her 70-year-old husband. She says, \"He woke up and the left side of his face is drooping, and he's slurring his words.\"", "options": ["Bring him in today. We have an opening at 2:00 PM.", "Have him lie down and drink some water. Call us back if it doesn't get better in an hour.", "This sounds like a stroke. Please hang up and call 911 for an ambulance immediately."], "correctAnswer": 2, "feedback": "Sudden facial drooping and slurred speech are key signs of a stroke. Immediate medical intervention is crucial to minimize brain damage. The 'Time is Brain' concept means directing them to call 911 is the only correct and safe option." },
           { "scenario": "A young adult calls complaining of \"a sharp, constant pain in my lower right stomach that started last night and is getting worse. I also feel nauseous.\"", "options": ["Let's schedule you for the first available appointment tomorrow to see the doctor.", "That could be appendicitis. You should go to the Emergency Room to get it checked out.", "Try taking an antacid. If the pain continues, you can book an appointment online."], "correctAnswer": 1, "feedback": "Sharp, localized pain in the lower right abdomen is a classic symptom of appendicitis, which requires urgent surgical evaluation. An office appointment would cause a dangerous delay in diagnosis and treatment." },
@@ -293,18 +320,8 @@
           { "scenario": "A patient calls stating they fell on their outstretched hand and now their wrist is deformed, swollen, and extremely painful.", "options": ["Wrap your wrist and apply ice. We can see you in the office tomorrow.", "It sounds like you have a fracture and possibly a dislocation. You need to go to an Urgent Care or ER for an X-ray.", "Take some pain medication and try to move it gently."], "correctAnswer": 1, "feedback": "Obvious deformity after an injury is a clear sign of a fracture or dislocation. The patient needs immediate imaging (X-ray) and treatment (setting the bone/reduction) at a facility equipped for it, such as an ER or a well-equipped Urgent Care." },
           { "scenario": "A patient calls complaining of seeing flashes of light and new 'floaters' in their vision.", "options": ["This is a common symptom of aging. Let's make an appointment with your eye doctor.", "Those can be symptoms of a retinal tear or detachment. You need to be seen by an ophthalmologist or go to the ER immediately.", "Close your eyes and rest for a while to see if they go away."], "correctAnswer": 1, "feedback": "The sudden onset of light flashes and floaters can be a sign of a posterior vitreous detachment, which can lead to a retinal tear or detachment. This is an ophthalmic emergency that requires urgent evaluation to prevent permanent vision loss." },
           { "scenario": "A patient calls and says they accidentally splashed bleach in their eye.", "options": ["Immediately flush your eye with running water for at least 15 minutes, and then go to the ER.", "Come into the office and we can try to wash it out for you.", "Don't worry, the eye will naturally tear up and wash it out on its own."], "correctAnswer": 0, "feedback": "A chemical splash in the eye is an emergency. The first and most critical step is immediate and copious irrigation with water to minimize damage, followed by an urgent evaluation in the ER. Delaying irrigation to travel to the office is dangerous." },
-           {
-            "scenario": "A patient calls because their home carbon monoxide detector is going off and they feel dizzy and nauseous.",
-            "options": [
-              "Open all the windows and see if the alarm stops.",
-              "Get everyone out of the house into fresh air immediately and then call 911 from a safe location.",
-              "It's probably a faulty detector. Try changing the batteries."
-            ],
-            "correctAnswer": 1,
-            "feedback": "Carbon monoxide is a colorless, odorless gas that can be lethal. If the alarm is sounding and people have symptoms, it is a true emergency. The first priority is to evacuate the area and then call 911 for the fire department and medical assistance."
-          },
-          {
-            "scenario": "A caller reports that a family member who is a known diabetic is now acting very aggressively and is not making sense.", "options": ["This sounds like a behavioral issue. Let's schedule an appointment with a therapist.", "Strange behavior can be a sign of dangerously low blood sugar. This is a medical emergency. Call 911.", "Try to give them something to eat and see if their behavior improves."], "correctAnswer": 1, "feedback": "In a diabetic patient, sudden and severe changes in behavior (like aggression or confusion) are often a symptom of severe hypoglycemia (low blood sugar), which can lead to seizures, coma, and death. This is a 911 emergency." },
+          { "scenario": "A patient calls because their home carbon monoxide detector is going off and they feel dizzy and nauseous.", "options": ["Open all the windows and see if the alarm stops.", "Get everyone out of the house into fresh air immediately and then call 911 from a safe location.", "It's probably a faulty detector. Try changing the batteries."], "correctAnswer": 1, "feedback": "Carbon monoxide is a colorless, odorless gas that can be lethal. If the alarm is sounding and people have symptoms, it is a true emergency. The first priority is to evacuate the area and then call 911 for the fire department and medical assistance." },
+          { "scenario": "A caller reports that a family member who is a known diabetic is now acting very aggressively and is not making sense.", "options": ["This sounds like a behavioral issue. Let's schedule an appointment with a therapist.", "Strange behavior can be a sign of dangerously low blood sugar. This is a medical emergency. Call 911.", "Try to give them something to eat and see if their behavior improves."], "correctAnswer": 1, "feedback": "In a diabetic patient, sudden and severe changes in behavior (like aggression or confusion) are often a symptom of severe hypoglycemia (low blood sugar), which can lead to seizures, coma, and death. This is a 911 emergency." },
           { "scenario": "A patient calls for a new appointment, mentioning they have a painless lump on their neck that has been there for several months.", "options": ["A painless lump can be serious. You need to go to the ER today.", "This is a non-urgent issue. I can schedule a routine appointment for you to have the doctor check it.", "You should hang up and call 911."], "correctAnswer": 1, "feedback": "While a persistent lump needs evaluation, the fact that it is painless and has been present for months makes it a non-urgent issue suitable for a routine office visit. There are no signs of acute distress or emergency." },
           { "scenario": "A patient calls saying they are having severe, tearing back pain that feels like it's radiating to their chest.", "options": ["That could be a muscle strain. Try using a heating pad.", "That could be a sign of an aortic dissection, which is a life-threatening emergency. You must call 911 immediately.", "We can get you an appointment to see the doctor for back pain tomorrow."], "correctAnswer": 1, "feedback": "A sudden, severe, tearing or ripping pain in the chest or back is the classic description of an aortic dissection, a tear in the body's main artery. This is one of the most immediate and life-threatening surgical emergencies." },
           { "scenario": "A patient calls because their 3-year-old put a bead in their nose, but they are breathing fine.", "options": ["A foreign body in the nose needs to be removed by a doctor. You should go to an Urgent Care or ER.", "Try to get it out yourself with a pair of tweezers.", "It will probably fall out on its own. Just keep an eye on it."], "correctAnswer": 0, "feedback": "A foreign body in the nose can cause tissue damage or be inhaled into the lungs. Attempting to remove it at home can push it in further. This requires professional removal, which can be done at an Urgent Care or ER." },
@@ -316,8 +333,8 @@
           { "scenario": "A patient calls because they are out of their anxiety medication and their pharmacy won't refill it.", "options": ["Running out of certain medications can be dangerous. I will send an urgent message to the medical assistant about your refill request.", "You need to go to the ER to get a prescription.", "The doctor requires an appointment for all refills, so the soonest we can see you is in three weeks."], "correctAnswer": 0, "feedback": "Abruptly stopping certain anxiety medications can cause withdrawal symptoms. While not a 911 emergency, it is an urgent issue. The correct procedure is to route the request immediately to clinical staff who can address it promptly." },
           { "scenario": "A patient calls with a severe toothache and facial swelling.", "options": ["We are a medical office. You need to call a dentist. If you can't breathe, go to the ER.", "I can schedule an appointment for you to see the doctor for the pain.", "Take some pain medication and wait for the swelling to go down."], "correctAnswer": 0, "feedback": "A toothache, even if severe, is a dental issue. Medical offices are not equipped to handle it. The correct action is to direct the patient to a dentist, adding the safety advice to go to the ER for any signs of airway compromise from the swelling." },
           { "scenario": "A patient calls after fainting. They say they were standing for a long time, felt lightheaded, and then briefly passed out, but feel fine now.", "options": ["Any episode of passing out needs a 911 call.", "I'm glad you feel better now, but the doctor will want to see you to find out why you fainted. I can make an appointment for you today or tomorrow.", "As long as you feel fine now, there's no need to be seen."], "correctAnswer": 1, "feedback": "While fainting (syncope) can be serious, a single episode with a clear trigger (like prolonged standing) and a quick, full recovery is often not a 911 emergency. However, it always warrants a prompt medical evaluation in the office to rule out cardiac or neurological causes." }
-        ],
-        documentation: [
+        ];
+    questionBank.documentation = [
           { "scenario": "PATIENT NOTE -- Name: Johnathon Smith, DOB: 4-8-1975, Phone: 555-123-4567, Complaint: Pt c/o HA for the last two days. Allergic to PCN.", "options": ["The abbreviation 'c/o' is non-standard.", "The date of birth is missing the leading zero and uses dashes.", "The abbreviation 'PCN' for penicillin is unclear.", "The patient's first name, 'Johnathon', is spelled correctly."], "correctAnswer": 1, "feedback": "Dates should always be in a consistent MM/DD/YYYY format (e.g., 04/08/1975). Inconsistent formats can lead to data sorting issues and misinterpretation, especially with international patients." },
           { "scenario": "PATIENT NOTE -- Name: Anabelle Rodriguez, DOB: 11/25/1990, Appt: 9/6/25 at 2pm, Reason: Pt needs a refill for her BP meds. Pharmacy is Walgreens on Main.", "options": ["The abbreviation 'BP' should be written out as 'blood pressure'.", "The pharmacy location is too vague.", "The appointment time should use a 24-hour format.", "The patient's first name is spelled 'Annabelle'."], "correctAnswer": 1, "feedback": "Many towns have multiple Walgreens, often on a 'Main St'. A specific address or cross-street is necessary to prevent prescriptions from being sent to the wrong location." },
           { "scenario": "PATIENT NOTE -- Name: Micheal Chen, DOB: 01/15/1955, Complaint: Patient has RA and the pain has been worse recently. He is taking his medication.", "options": ["The patient's first name is missing an 'a' (Michael).", "The timeframe 'recently' is too vague for a clinical note.", "The term 'RA' is ambiguous.", "The note should specify which medication the patient is taking."], "correctAnswer": 0, "feedback": "A misspelled name can lead to duplicate charts, billing errors, and potentially life-threatening medical mistakes. Always confirm spelling with the patient." },
@@ -358,8 +375,8 @@
           { "scenario": "PATIENT NOTE -- Name: Anthony Parker, DOB: 06/30/1965, Complaint: Patient took his BP at home and it was high. Denies other symptoms.", "options": ["The term 'high' is too vague; the actual reading should be recorded.", "The abbreviation 'BP' for blood pressure is acceptable.", "Documenting that the patient denies other symptoms is good practice.", "The note correctly states where the BP was taken."], "correctAnswer": 0, "feedback": "A subjective term like 'high' is not clinically useful. The note must include the specific blood pressure numbers (e.g., '180/100') for the medical team to make an accurate assessment." },
           { "scenario": "PATIENT NOTE -- Name: Grace Edwards, DOB: 04/12/1989, Complaint: Pt is having a problem with her medication. She wants a call back.", "options": ["The desired action ('wants a call back') is clearly stated.", "The note is too vague about which medication and what the 'problem' is.", "The use of 'Pt' is standard.", "The patient's DOB is in the correct format."], "correctAnswer": 1, "feedback": "This note lacks the necessary detail for the clinical staff to act efficiently. The receptionist should have asked for the name of the medication and the specific problem (e.g., 'is having side effects,' 'thinks it's not working,' 'can't afford the refill')." },
           { "scenario": "PATIENT NOTE -- Name: Nicholas Collins, DOB: 02/15/1975, Reason: Patient left a message. He said, 'Call me back.' Phone number is 555-234-5678.", "options": ["The phone number is documented.", "The note should specify the reason for the patient's call.", "The note accurately reflects the message left.", "Documenting that it was a message is important context."], "correctAnswer": 1, "feedback": "While accurately transcribed, this note is not helpful. A good note would prompt the receptionist to listen to the message again or check the caller ID for context. A message this vague requires clarification before being tasked to clinical staff." }
-        ],
-        scheduling: [
+        ];
+    questionBank.scheduling = [
             { "scenario": "A patient is 15 minutes late for their appointment. The next patient has already arrived on time. The late patient arrives at the desk.", "options": ["Tell the patient to have a seat and that the doctor will see them next.", "Check the clinic's late-arrival policy, and politely inform the patient they may need to reschedule or wait until the next open slot.", "Immediately cancel their appointment and charge a no-show fee.", "Tell the on-time patient that the doctor is running behind schedule."], "correctAnswer": 1, "feedback": "Following a standard late-arrival policy ensures all patients are treated fairly and manages expectations. It respects the on-time patient's schedule while offering the late patient a clear, policy-driven path forward." },
             { "scenario": "A mother calls and wants to schedule appointments for her three children for their annual check-ups. She wants them to be seen 'all at once'.", "options": ["Book three separate, consecutive appointment slots and confirm the total time block with her.", "Book one extended, 60-minute appointment slot to cover all three children.", "Tell her that she must schedule on three different days to avoid overwhelming the doctor.", "Book a single 20-minute slot and tell her the doctor will be quick."], "correctAnswer": 0, "feedback": "Each patient requires their own individual appointment slot for proper charting, billing, and time management. Booking consecutive slots is the correct workflow to accommodate the family while keeping the schedule organized." },
             { "scenario": "A patient with a 10:00 AM appointment calls at 9:00 AM to ask if they can come in earlier because their afternoon plans changed.", "options": ["Tell them yes, they can come in right away.", "Look at the schedule for an actual open slot before 10:00 AM. If one exists, officially move the appointment. If not, explain the schedule is full.", "Advise them to just show up and hope for a cancellation.", "Suggest they cancel the 10:00 AM appointment and book a new one for another day."], "correctAnswer": 1, "feedback": "Never encourage patients to arrive without a scheduled slot. The correct workflow is to check for an actual opening and officially reschedule them, which maintains the integrity of the schedule and prevents chaotic waiting room backups." },
@@ -400,8 +417,8 @@
             { "scenario": "A patient asks for the first appointment of the day. You schedule them at 8:00 AM. They then ask, 'So the doctor will be ready for me right at 8:00?'", "options": ["Say 'Yes, absolutely.'", "Set a realistic expectation by saying, 'You are our first scheduled patient. Please arrive a few minutes early to check in, and the clinical team will bring you back as close to 8:00 AM as possible.'", "Tell them the doctor is always late in the morning.", "Promise them they won't have to wait at all."], "correctAnswer": 1, "feedback": "Managing patient expectations is key to satisfaction. This response is positive but realistic, accounting for the small, unpredictable delays that can happen even at the start of the day, which prevents frustration." },
             { "scenario": "A patient needs to be scheduled for a series of three related appointments over the next three weeks.", "options": ["Schedule the first visit and tell the patient to call back each week to schedule the next one.", "Schedule all three appointments at once, confirming the dates and times with the patient, and provide appointment cards or a printout for all three visits.", "Book the appointments without telling the patient the specific dates.", "Tell them to use the online portal to book the series themselves."], "correctAnswer": 1, "feedback": "This 'block scheduling' workflow is highly efficient for treatment series. It ensures the patient has their required appointments, reduces the chance of scheduling gaps, and minimizes administrative work later." },
             { "scenario": "The office is transitioning to a new Electronic Health Record (EHR) system. A patient calls and you need to book their appointment in two different systems (the old and the new) to be safe.", "options": ["Refuse to book any appointments until you are fully trained on the new system.", "Book the appointment only in the old system and hope the data transfers.", "Follow the specific transitional workflow provided by your manager, which may involve double-entry or other specific steps to ensure no appointments are lost.", "Book the appointment only in the new system, even if it's not officially 'live' yet."], "correctAnswer": 2, "feedback": "During any major operational change, following the prescribed transitional workflow is critical. Ad-libbing or taking shortcuts can lead to lost data and significant patient scheduling errors." }
-        ],
-        hipaa: [
+        ];
+    questionBank.hipaa = [
             { "scenario": "A woman calls and says, 'Hi, my husband John Smith had an appointment this morning. I'm just calling to find out what the doctor said.' You do not see a release of information form on file for her.", "options": ["Check the chart and tell her, 'The doctor said everything looks fine, it was just a minor infection.'", "Say, 'I'm sorry, but due to federal privacy laws, I can't share any information with you. I can leave a message for John to call you.'", "Ask her to describe her husband to make sure she's a legitimate caller.", "Tell her you can't help and hang up."], "correctAnswer": 1, "feedback": "This is the most professional and compliant response. It correctly cites privacy laws without being overly technical, protects the patient's PHI, and offers a helpful next step (leaving a message for the patient)." },
             { "scenario": "You need to leave a voicemail for a patient to confirm their appointment for tomorrow at 10:00 AM for a wellness visit.", "options": ["Leave a detailed message: 'Hi Jane, this is a reminder about your wellness visit with Dr. Adams tomorrow at 10:00 AM. See you then!'", "Leave a minimal message: 'This is the doctor's office calling for Jane Doe. Please call us back at your earliest convenience.'", "Leave a message with a family member who answers the phone.", "Don't leave a message at all."], "correctAnswer": 1, "feedback": "A voicemail is not secure. The correct procedure is to leave a minimal message that does not confirm they are a patient or the nature of their visit (PHI), but allows them to call back. This is known as the 'Minimum Necessary' rule." },
             { "scenario": "A patient is at the check-in desk, and you need to confirm their date of birth and address. The waiting room is full.", "options": ["Loudly ask, 'Can you confirm your date of birth, January 5th, 1980, and your address at 123 Maple Street?'", "Quietly slide a clipboard towards them and ask, 'Could you please verify your information on this form for me?'", "Skip the verification process because it's too crowded.", "Ask them to step into a private hallway to confirm their information."], "correctAnswer": 1, "feedback": "This is the best way to handle PHI verification in a public space. It avoids an 'incidental disclosure' by not speaking the information aloud for others to hear, ensuring privacy while maintaining an efficient workflow." },
@@ -442,8 +459,7 @@
             { "scenario": "A patient calls to update their address. They also say, 'While you're in there, can you remove my old diagnosis of depression? I don't want anyone to see that.'", "options": ["Delete the diagnosis from the problem list as requested.", "Explain that medical records cannot be deleted, but they have the right to request an 'amendment' to their record. Provide them with the official form and procedure for this request.", "Tell them no, the record is permanent.", "Inform the doctor that the patient wants the diagnosis removed."], "correctAnswer": 1, "feedback": "HIPAA gives patients the right to request amendments to their records. The medical record cannot be simply deleted, but there is a formal process for disputing information. This response correctly informs the patient of their rights and the proper workflow." },
             { "scenario": "You get a call from someone who says, 'I'm from the health department, I need a list of all your patients who were diagnosed with the flu last week.'", "options": ["Refuse the request, citing HIPAA.", "Provide the list, as public health reporting is mandatory.", "Politely ask for the caller's name and organization, and tell them you will have your office manager or Privacy Officer call them back at an official health department number to verify the request's legitimacy.", "Ask them to send an email request."], "correctAnswer": 2, "feedback": "Reporting certain diseases to public health authorities is a legally required disclosure under HIPAA. However, you must first verify that the request is legitimate. The 'call back' method to a known, official number is the best practice to avoid scams or phishing." },
             { "scenario": "A patient wants to use a public waiting room computer to log into their patient portal.", "options": ["Discourage this, explaining that public computers are not secure and they should use a personal device to access their health information.", "Help them log in on the public computer.", "Tell them the computer is for staff use only.", "Watch them to make sure they log out properly."], "correctAnswer": 0, "feedback": "This is a proactive privacy measure. While you can't forbid them, the best practice is to educate the patient on the security risks of accessing PHI on a public terminal, helping them protect their own information." }
-        ]
-    };
+        ];
 
     const moduleState = {
         audio: { currentIndex: 0, total: questionBank.audio.length, shuffledOrder: [] },
@@ -569,6 +585,3 @@
 </script>
 </body>
 </html>
-
-
-
