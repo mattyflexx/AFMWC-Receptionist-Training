@@ -1,178 +1,33 @@
-<html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Receptionist Training Application</title>
-    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f7f6; color: #333; padding: 20px; }
-        .app-container { max-width: 850px; margin: auto; background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        h1, h2, h3 { color: #005a78; }
-        .main-menu { text-align: center; }
-        .menu-category { background-color: #fafafa; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 15px; cursor: pointer; transition: all 0.2s ease-in-out; }
-        .menu-category:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-color: #007b9a; }
-        .menu-category h2 { margin-top: 0; }
-        .menu-category p { color: #555; }
-        .module { display: none; }
-        .scenario-box, .task-box { border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; border-radius: 5px; background-color: #fafafa; }
-        .patient-chart { border: 1px solid #ccc; padding: 15px; background-color: #ffffF0; font-family: monospace; white-space: pre-wrap; line-height: 1.6; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-weight: bold; margin-bottom: 5px; }
-        textarea#log-note-input { width: 95%; height: 200px; font-size: 14px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
-        audio { width: 100%; margin-top: 10px; }
-        button.submit-btn { background-color: #28a745; color: white; padding: 12px 18px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; margin-top: 10px;}
-        button.submit-btn:hover { background-color: #218838; }
-        button.menu-btn { background-color: #6c757d; float: right; }
-        button.menu-btn:hover { background-color: #5a6268; }
-        .feedback { margin-top: 10px; padding: 10px; border-radius: 4px; font-weight: bold; clear: both; }
-        #audio-feedback-checklist ul { list-style-type: none; padding-left: 0; }
-        #audio-feedback-checklist li { margin-bottom: 8px; font-size: 16px; }
-        .check-correct { color: #155724; font-weight: bold; margin-right: 8px; }
-        .check-incorrect { color: #721c24; font-weight: bold; margin-right: 8px; }
-        .correct { color: #155724; background-color: #d4edda; border: 1px solid #c3e6cb;}
-        .incorrect { color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb;}
-        .critical { color: #856404; background-color: #fff3cd; border: 1px solid #ffeeba;}
-    </style>
-</head>
-<body>
-
-<div class="app-container">
-    <button class="submit-btn menu-btn" onclick="showView('main-menu')" style="display:none;">Back to Menu</button>
-    <h1>Receptionist Training Application</h1>
-
-    <div id="main-menu" class="view">
-        <p>Select a training category to begin.</p>
-        <div class="menu-category" onclick="startModule('audio')">
-            <h2>Audio Transcription (10 Scenarios)</h2>
-            <p>Listen to patient calls and accurately document the key information in a log note.</p>
-        </div>
-        <div class="menu-category" onclick="startModule('triage')">
-            <h2>Patient Triage (50 Scenarios)</h2>
-            <p>Learn to identify urgent symptoms and guide patients to the correct level of care.</p>
-        </div>
-        <div class="menu-category" onclick="startModule('documentation')">
-            <h2>Documentation Accuracy (41 Scenarios)</h2>
-            <p>Develop skills in transcribing patient information accurately and professionally.</p>
-        </div>
-        <div class="menu-category" onclick="startModule('scheduling')">
-            <h2>Scheduling & Workflows (41 Scenarios)</h2>
-            <p>Practice common scheduling tasks like booking, canceling, and rescheduling appointments.</p>
-        </div>
-        <div class="menu-category" onclick="startModule('hipaa')">
-            <h2>HIPAA & Patient Privacy (41 Scenarios)</h2>
-            <p>Test your knowledge of privacy rules with common real-world scenarios.</p>
-        </div>
-    </div>
-
-    <!-- ===== MODULE 1: AUDIO TRANSCRIPTION ===== -->
-    <div id="module-audio" class="view module">
-        <h2 id="audio-module-title"></h2>
-        <div class="scenario-box">
-            <h3>Scenario: <span id="audio-scenario-name"></span></h3>
-            <p>Listen to the following audio clip. Play it as many times as you need.</p>
-            <audio controls id="audio-player-element" controlslist="nodownload noplaybackrate"></audio>
-        </div>
-        <div class="task-box">
-            <h3>Task: Transcribe the important information into a patient log note below.</h3>
-            <textarea id="log-note-input" placeholder="Type your patient note here..."></textarea>
-            <div id="audio-feedback" class="feedback" style="display:none;">
-                <h4>Feedback Checklist:</h4>
-                <div id="audio-feedback-checklist"></div>
-            </div>
-        </div>
-        <button class="submit-btn" id="audio-submit-btn" onclick="checkAnswer('audio')">Submit Note for Review</button>
-        <button class="submit-btn" id="audio-next-btn" onclick="nextQuestion('audio')" style="display:none;">Next Scenario</button>
-    </div>
-    
-    <!-- ===== MODULE 2: PATIENT TRIAGE ===== -->
-    <div id="module-triage" class="view module">
-        <h2 id="triage-module-title"></h2>
-        <div class="scenario-box"><h3>Scenario</h3><p id="triage-scenario-text"></p></div>
-        <div class="task-box">
-            <h3>Task: Choose the single most appropriate response.</h3>
-            <div id="triage-options-container"></div>
-            <div id="triage-feedback" class="feedback" style="display:none;"></div>
-        </div>
-        <button class="submit-btn" id="triage-submit-btn" onclick="checkAnswer('triage')">Submit Response</button>
-        <button class="submit-btn" id="triage-next-btn" onclick="nextQuestion('triage')" style="display:none;">Next Question</button>
-    </div>
-
-    <!-- ===== MODULE 3: DOCUMENTATION ACCURACY ===== -->
-    <div id="module-documentation" class="view module">
-        <h2 id="documentation-module-title"></h2>
-        <div class="scenario-box">
-            <h3>Scenario: Review the following note for errors.</h3>
-            <div id="documentation-scenario-text" class="patient-chart"></div>
-        </div>
-        <div class="task-box">
-            <h3>Task: Identify the most significant error or the correct statement below.</h3>
-            <div id="documentation-options-container"></div>
-            <div id="documentation-feedback" class="feedback" style="display:none;"></div>
-        </div>
-        <button class="submit-btn" id="documentation-submit-btn" onclick="checkAnswer('documentation')">Submit Answer</button>
-        <button class="submit-btn" id="documentation-next-btn" onclick="nextQuestion('documentation')" style="display:none;">Next Question</button>
-    </div>
-
-    <!-- ===== MODULE 4: SCHEDULING & WORKFLOWS ===== -->
-    <div id="module-scheduling" class="view module">
-        <h2 id="scheduling-module-title"></h2>
-        <div class="scenario-box"><h3>Scenario</h3><p id="scheduling-scenario-text"></p></div>
-        <div class="task-box">
-            <h3>Task: Choose the best course of action.</h3>
-            <div id="scheduling-options-container"></div>
-            <div id="scheduling-feedback" class="feedback" style="display:none;"></div>
-        </div>
-        <button class="submit-btn" id="scheduling-submit-btn" onclick="checkAnswer('scheduling')">Submit Answer</button>
-        <button class="submit-btn" id="scheduling-next-btn" onclick="nextQuestion('scheduling')" style="display:none;">Next Question</button>
-    </div>
-
-    <!-- ===== MODULE 5: HIPAA & PATIENT PRIVACY ===== -->
-    <div id="module-hipaa" class="view module">
-        <h2 id="hipaa-module-title"></h2>
-        <div class="scenario-box"><h3>Scenario</h3><p id="hipaa-scenario-text"></p></div>
-        <div class="task-box">
-            <h3>Task: Choose the most professional and compliant response.</h3>
-            <div id="hipaa-options-container"></div>
-            <div id="hipaa-feedback" class="feedback" style="display:none;"></div>
-        </div>
-        <button class="submit-btn" id="hipaa-submit-btn" onclick="checkAnswer('hipaa')">Submit Answer</button>
-        <button class="submit-btn" id="hipaa-next-btn" onclick="nextQuestion('hipaa')" style="display:none;">Next Question</button>
-    </div>
-
-</div>
-
-<script>
-    const questionBank = {
-        audio: [
-            {
-                scenarioName: "The Rapid-Fire Rusher",
-                audioSrc: "https://sndup.net/pqq62",
-                checklist: [
-                    { label: "Patient Name (Jennifer Kowalski)", keywords: ["jennifer", "kowalski"] },
-                    { label: "Date of Birth (04/16/1985)", keywords: ["04/16/1985", "april 16"] },
-                    { label: "Reason for Call (Right-side pain)", keywords: ["pain", "right side"] },
-                    { label: "Duration (2 days)", keywords: ["two days", "2 days"] },
-                    { label: "Requested Doctor (Dr. Evans)", keywords: ["evans"] },
-                    { label: "Insurance Provider (Aetna)", keywords: ["aetna"] },
-                    { label: "Insurance ID (555-123-4567)", keywords: ["555-123-4567"] },
-                    { label: "Callback Number (555-867-5309)", keywords: ["555-867-5309", "867-5309"] },
-                    { label: "Callback Type (Cell)", keywords: ["cell"] }
-                ]
-            },
-            {
-              scenarioName: "The Vague & Anxious Whisperer",
-              audioSrc: "https://sndup.net/nnrsj",
-              checklist: [
+// This is the fixed JavaScript portion of your code
+const questionBank = {
+    audio: [
+        {
+            scenarioName: "The Rapid-Fire Rusher",
+            audioSrc: "https://sndup.net/pqq62", // Removed /d suffix
+            checklist: [
+                { label: "Patient Name (Jennifer Kowalski)", keywords: ["jennifer", "kowalski"] },
+                { label: "Date of Birth (04/16/1985)", keywords: ["04/16/1985", "april 16"] },
+                { label: "Reason for Call (Right-side pain)", keywords: ["pain", "right side"] },
+                { label: "Duration (2 days)", keywords: ["two days", "2 days"] },
+                { label: "Requested Doctor (Dr. Evans)", keywords: ["evans"] },
+                { label: "Insurance Provider (Aetna)", keywords: ["aetna"] },
+                { label: "Insurance ID (555-123-4567)", keywords: ["555-123-4567"] },
+                { label: "Callback Number (555-867-5309)", keywords: ["555-867-5309", "867-5309"] },
+                { label: "Callback Type (Cell)", keywords: ["cell"] }
+            ]
+        },
+        {
+            "scenarioName": "The Vague & Anxious Whisperer",
+            "audioSrc": "https://sndup.net/nnrsj", // Removed /d suffix
+            "checklist": [
                 { "label": "Patient Name (David Chen)", "keywords": ["david", "chen"] },
                 { "label": "Patient Status (Existing)", "keywords": ["existing", "patient"] },
                 { "label": "Primary Symptom (Dizziness)", "keywords": ["dizzy", "dizziness"] },
                 { "label": "Secondary Symptom (Fatigue)", "keywords": ["tired", "fatigue"] },
                 { "label": "Symptom Duration (One week)", "keywords": ["week"] }
-              ]
-            },
-            {
-              scenarioName: "The Distracted Multitasker",
+            ]
+        },
+scenarioName: "The Distracted Multitasker",
               audioSrc: "https://sndup.net/7fcdj",
               checklist: [
                 { "label": "Patient Name (Michael Perkins)", "keywords": ["michael", "perkins"] },
@@ -461,127 +316,140 @@
             { "scenario": "A patient wants to use a public waiting room computer to log into their patient portal.", "options": ["Discourage this, explaining that public computers are not secure and they should use a personal device to access their health information.", "Help them log in on the public computer.", "Tell them the computer is for staff use only.", "Watch them to make sure they log out properly."], "correctAnswer": 0, "feedback": "This is a proactive privacy measure. While you can't forbid them, the best practice is to educate the patient on the security risks of accessing PHI on a public terminal, helping them protect their own information." }
         ];
 
-    const moduleState = {
-        audio: { currentIndex: 0, total: questionBank.audio.length, shuffledOrder: [] },
-        triage: { currentIndex: 0, total: questionBank.triage.length, shuffledOrder: [] },
-        documentation: { currentIndex: 0, total: questionBank.documentation.length, shuffledOrder: [] },
-        scheduling: { currentIndex: 0, total: questionBank.scheduling.length, shuffledOrder: [] },
-        hipaa: { currentIndex: 0, total: questionBank.hipaa.length, shuffledOrder: [] }
-    };
+};
 
-    function showView(viewId) {
-        document.querySelectorAll('.view').forEach(view => view.style.display = 'none');
-        document.getElementById(viewId).style.display = 'block';
-        document.querySelector('.menu-btn').style.display = (viewId !== 'main-menu') ? 'block' : 'none';
-    }
-    window.onload = () => showView('main-menu');
+const moduleState = {
+    audio: { currentIndex: 0, total: questionBank.audio.length, shuffledOrder: [] },
+    triage: { currentIndex: 0, total: questionBank.triage.length, shuffledOrder: [] },
+    documentation: { currentIndex: 0, total: questionBank.documentation.length, shuffledOrder: [] },
+    scheduling: { currentIndex: 0, total: questionBank.scheduling.length, shuffledOrder: [] },
+    hipaa: { currentIndex: 0, total: questionBank.hipaa.length, shuffledOrder: [] }
+};
 
-    function startModule(moduleName) {
-        const state = moduleState[moduleName];
-        state.currentIndex = 0;
-        state.shuffledOrder = Array.from(Array(state.total).keys());
-        if (state.total > 1) { // Only shuffle if there's more than one question
-            for (let i = state.shuffledOrder.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [state.shuffledOrder[i], state.shuffledOrder[j]] = [state.shuffledOrder[j], state.shuffledOrder[i]];
-            }
-        }
-        loadQuestion(moduleName);
-        showView(`module-${moduleName}`);
+function showView(viewId) {
+    document.querySelectorAll('.view').forEach(view => view.style.display = 'none');
+    document.getElementById(viewId).style.display = 'block';
+    document.querySelector('.menu-btn').style.display = (viewId !== 'main-menu') ? 'block' : 'none';
+}
+window.onload = () => showView('main-menu');
+
+function startModule(moduleName) {
+    const state = moduleState[moduleName];
+    state.currentIndex = 0;
+    state.shuffledOrder = Array.from(Array(state.total).keys());
+    // Fisher-Yates shuffle algorithm
+    for (let i = state.shuffledOrder.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [state.shuffledOrder[i], state.shuffledOrder[j]] = [state.shuffledOrder[j], state.shuffledOrder[i]];
     }
+    loadQuestion(moduleName);
+    showView(`module-${moduleName}`);
+}
+
+function loadQuestion(moduleName) {
+    const state = moduleState[moduleName];
+    const questionIndex = state.shuffledOrder[state.currentIndex];
+    const question = questionBank[moduleName][questionIndex];
+    const titleCaseName = moduleName.charAt(0).toUpperCase() + moduleName.slice(1);
     
-    function loadQuestion(moduleName) {
+    document.getElementById(`${moduleName}-module-title`).textContent = `Module: ${titleCaseName} (Question ${state.currentIndex + 1} of ${state.total})`;
+    
+    if (moduleName === 'audio') {
+        document.getElementById('audio-scenario-name').textContent = question.scenarioName;
+        
+        // Fixed audio loading
+        const audioPlayer = document.getElementById('audio-player-element');
+        audioPlayer.src = question.audioSrc;
+        audioPlayer.load(); // Force reload
+        
+        document.getElementById('log-note-input').value = ''; 
+    } else {
+         document.getElementById(`${moduleName}-scenario-text`).textContent = question.scenario;
+    }
+
+    const optionsContainer = document.getElementById(`${moduleName}-options-container`);
+    if (optionsContainer) { 
+        optionsContainer.innerHTML = ''; 
+        question.options.forEach((optionText, i) => {
+            optionsContainer.innerHTML += `<div class="form-group"><input type="radio" id="${moduleName}_option${i}" name="${moduleName}_response" value="${i}"><label for="${moduleName}_option${i}" style="display:inline;">${optionText}</label></div>`;
+        });
+    }
+
+    document.getElementById(`${moduleName}-feedback`).style.display = 'none';
+    document.getElementById(`${moduleName}-submit-btn`).style.display = 'inline-block';
+    document.getElementById(`${moduleName}-next-btn`).style.display = 'none';
+}
+
+function checkAnswer(moduleName) {
+    if (moduleName === 'audio') {
+        const userInput = document.getElementById('log-note-input').value.toLowerCase().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g," ");
+        const state = moduleState.audio;
+        const questionIndex = state.shuffledOrder[state.currentIndex];
+        const checklist = questionBank.audio[questionIndex].checklist;
+        
+        const feedbackContainer = document.getElementById('audio-feedback-checklist');
+        feedbackContainer.innerHTML = '<ul></ul>';
+        const ul = feedbackContainer.querySelector('ul');
+        let score = 0;
+
+        checklist.forEach(item => {
+            const allKeywordsFound = item.keywords.every(keyword => userInput.includes(keyword.toLowerCase()));
+            if (allKeywordsFound) {
+                score++;
+                ul.innerHTML += `<li><span class="check-correct">✔</span> ${item.label}</li>`;
+            } else {
+                ul.innerHTML += `<li><span class="check-incorrect">❌</span> ${item.label}</li>`;
+            }
+        });
+
+        const feedbackEl = document.getElementById('audio-feedback');
+        feedbackEl.className = 'feedback correct';
+        feedbackEl.querySelector('h4').textContent = `Feedback Checklist: You captured ${score} out of ${checklist.length} critical details.`;
+        feedbackEl.style.display = 'block';
+
+    } else { 
+        const selected = document.querySelector(`input[name="${moduleName}_response"]:checked`);
+        if (!selected) { alert("Please select an answer."); return; }
+        
+        const feedbackEl = document.getElementById(`${moduleName}-feedback`);
         const state = moduleState[moduleName];
         const questionIndex = state.shuffledOrder[state.currentIndex];
         const question = questionBank[moduleName][questionIndex];
+        const selectedAnswerIndex = parseInt(selected.value);
+        
+        if (selectedAnswerIndex === question.correctAnswer) {
+            feedbackEl.textContent = `CORRECT. ${question.feedback}`;
+            feedbackEl.className = "feedback correct";
+        } else {
+            let feedbackClass = (moduleName === 'triage' || moduleName === 'hipaa') ? 'critical' : 'incorrect';
+            feedbackEl.textContent = `INCORRECT. ${question.feedback}`;
+            feedbackEl.className = `feedback ${feedbackClass}`;
+        }
+        feedbackEl.style.display = "block";
+    }
+    
+    document.getElementById(`${moduleName}-submit-btn`).style.display = 'none';
+    document.getElementById(`${moduleName}-next-btn`).style.display = 'inline-block';
+}
+
+function nextQuestion(moduleName) {
+    const state = moduleState[moduleName];
+    state.currentIndex++;
+    if (state.currentIndex < state.total) {
+        loadQuestion(moduleName);
+    } else {
         const titleCaseName = moduleName.charAt(0).toUpperCase() + moduleName.slice(1);
-        
-        document.getElementById(`${moduleName}-module-title`).textContent = `Module: ${titleCaseName} (Question ${state.currentIndex + 1} of ${state.total})`;
-        
-        if (moduleName === 'audio') {
-            document.getElementById('audio-scenario-name').textContent = question.scenarioName;
-            document.getElementById('audio-player-element').src = question.audioSrc;
-            document.getElementById('log-note-input').value = ''; // Clear textarea
-        } else {
-             document.getElementById(`${moduleName}-scenario-text`).textContent = question.scenario;
-        }
-
-        const optionsContainer = document.getElementById(`${moduleName}-options-container`);
-        if (optionsContainer) { 
-            optionsContainer.innerHTML = ''; 
-            question.options.forEach((optionText, i) => {
-                optionsContainer.innerHTML += `<div class="form-group"><input type="radio" id="${moduleName}_option${i}" name="${moduleName}_response" value="${i}"><label for="${moduleName}_option${i}" style="display:inline;">${optionText}</label></div>`;
-            });
-        }
-
-        document.getElementById(`${moduleName}-feedback`).style.display = 'none';
-        document.getElementById(`${moduleName}-submit-btn`).style.display = 'inline-block';
-        document.getElementById(`${moduleName}-next-btn`).style.display = 'none';
+        alert(`You have completed the ${titleCaseName} module! Returning to the main menu.`);
+        showView('main-menu');
     }
+}
 
-    function checkAnswer(moduleName) {
-        if (moduleName === 'audio') {
-            const userInput = document.getElementById('log-note-input').value.toLowerCase().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g," ");
-            const state = moduleState.audio;
-            const questionIndex = state.shuffledOrder[state.currentIndex];
-            const checklist = questionBank.audio[questionIndex].checklist;
-            
-            const feedbackContainer = document.getElementById('audio-feedback-checklist');
-            feedbackContainer.innerHTML = '<ul></ul>';
-            const ul = feedbackContainer.querySelector('ul');
-            let score = 0;
-
-            checklist.forEach(item => {
-                const allKeywordsFound = item.keywords.every(keyword => userInput.includes(keyword.toLowerCase()));
-                if (allKeywordsFound) {
-                    score++;
-                    ul.innerHTML += `<li><span class="check-correct">✔</span> ${item.label}</li>`;
-                } else {
-                    ul.innerHTML += `<li><span class="check-incorrect">❌</span> ${item.label}</li>`;
-                }
-            });
-
-            const feedbackEl = document.getElementById('audio-feedback');
-            feedbackEl.className = 'feedback correct';
-            feedbackEl.querySelector('h4').textContent = `Feedback Checklist: You captured ${score} out of ${checklist.length} critical details.`;
-            feedbackEl.style.display = 'block';
-
-        } else { 
-            const selected = document.querySelector(`input[name="${moduleName}_response"]:checked`);
-            if (!selected) { alert("Please select an answer."); return; }
-            
-            const feedbackEl = document.getElementById(`${moduleName}-feedback`);
-            const state = moduleState[moduleName];
-            const questionIndex = state.shuffledOrder[state.currentIndex];
-            const question = questionBank[moduleName][questionIndex];
-            const selectedAnswerIndex = parseInt(selected.value);
-            
-            if (selectedAnswerIndex === question.correctAnswer) {
-                feedbackEl.textContent = `CORRECT. ${question.feedback}`;
-                feedbackEl.className = "feedback correct";
-            } else {
-                let feedbackClass = (moduleName === 'triage' || moduleName === 'hipaa') ? 'critical' : 'incorrect';
-                feedbackEl.textContent = `INCORRECT. ${question.feedback}`;
-                feedbackEl.className = `feedback ${feedbackClass}`;
-            }
-            feedbackEl.style.display = "block";
-        }
-        
-        document.getElementById(`${moduleName}-submit-btn`).style.display = 'none';
-        document.getElementById(`${moduleName}-next-btn`).style.display = 'inline-block';
-    }
-
-    function nextQuestion(moduleName) {
-        const state = moduleState[moduleName];
-        state.currentIndex++;
-        if (state.currentIndex < state.total) {
-            loadQuestion(moduleName);
-        } else {
-            const titleCaseName = moduleName.charAt(0).toUpperCase() + moduleName.slice(1);
-            alert(`You have completed the ${titleCaseName} module! Returning to the main menu.`);
-            showView('main-menu');
-        }
-    }
-</script>
-</body>
-</html>
+// Add error handling for audio playback
+document.addEventListener('DOMContentLoaded', function() {
+    const audioPlayer = document.getElementById('audio-player-element');
+    
+    audioPlayer.addEventListener('error', function(e) {
+        console.error('Audio failed to load:', e);
+        alert('The audio file could not be loaded. Please try again or contact support.');
+    });
+});
